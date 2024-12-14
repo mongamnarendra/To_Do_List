@@ -1,0 +1,52 @@
+<h1>To Do List</h1>
+<div class="container">
+    <div class="content">
+        <form [formGroup]="formgroup" (ngSubmit)="onSubmit()">
+            <label for="task">Task to complete</label>
+            <input type="text" name="task" class="form-control in" placeholder="Enter task name" formControlName="taskname">
+            <div *ngIf="formgroup.get('taskname')?.invalid && formgroup.get('taskname')?.touched">
+              <small>taskname is required!</small>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+        <br>
+        <table class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Task Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of records; index as i">
+                <td>
+                  <span *ngIf="isEdit!=true">{{record.taskname}}</span>
+                  <input type="text" name="" id="" *ngIf="isEdit">
+                </td>
+
+                <td>
+                  <input type="checkbox"  id="in" (click)="update(record.status,i)">
+                </td>
+                <!-- <button class="button" (click)="onClick(record.taskname)">Edit</button> -->
+                <button class="button" (click)="onDelete(i,record.taskname)">Delete</button>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <div class="updater" *ngIf="isEdit">
+            <div class="matter">
+              <input
+                type="text"
+                id="update-input"
+                formControlName="taskname"
+                placeholder="Enter new task name"
+              />
+              <button class="btn btn-primary" (click)="editDetails()">Update</button>
+              <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+          </div>
+           -->
+    </div>
+    
+</div>
